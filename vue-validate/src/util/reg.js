@@ -1,21 +1,5 @@
 let reg = {}
 
-//正整数正则
-reg.posI = /^\d+$/;
-//负整数正则
-reg.negI = /^-\d+$/;
-//整数正则
-reg.numI = /^-?\d+$/;
-
-
-//可以是整数也可以是浮点数
-//正数
-reg.posF = /^\d*\.?\d+$/;
-//负数正则
-reg.negF = /^-\d*\.?\d+$/;
-//数字正则
-reg.numF = /^-?\d*\.?\d+$/;
-
 // 只能输入n位的数字：“^d{n}$”
 // 只能输入至少n位数字：“^d{n,}$”
 // 只能输入m-n位的数字：“^d{m,n}$”
@@ -23,6 +7,40 @@ reg.numF = /^-?\d*\.?\d+$/;
 
 //包含中文
 reg.chinaLanguage = /[\u4E00-\u9FA5]/;
+//只能中文
+reg.allChinaLanguage = /^[\u2E80-\u9FFF]+$/;
+//正整数正则
+reg.posI = {
+    key:/^\d+$/,
+    message:"请输入正整数"
+}
+//负整数正则
+reg.negI = {
+    key:/^-\d+$/,
+    message:"请输入负整数"
+}
+//整数正则
+reg.numI = {
+    key:/^-?\d+$/,
+    message:"请输入整数"
+}
+
+//可以是整数也可以是浮点数
+//正数
+reg.posF = {
+    key:/^\d*\.?\d+$/,
+    message:'请输入正数'
+}
+//负数正则
+reg.negF = {
+    key:/^-\d*\.?\d+$/,
+    message:'请输入负数'
+}
+//数字正则
+reg.numF = {
+    key:/^-?\d*\.?\d+$/,
+    message:'请输入数字'
+}
 
 //邮箱
 reg.email = {

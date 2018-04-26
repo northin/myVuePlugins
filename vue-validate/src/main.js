@@ -9,7 +9,7 @@ Vue.config.productionTip = false
 Vue.component('validate', { 
   template:`<div>
     <label>{{ title }}:</label>
-    <input type='text' v-validate="validate" :value="currentValue" @change="$emit('change',currentValue)" @blur="active=true" @input="handInput"/>
+    <input type='text' v-validate="validate" :value="currentValue" @change="$emit('change',currentValue)" @focus="active=false" @blur="active=true" @input="handInput"/>
     <span style='color:red' v-show="!validate.success" >*</span>
     <span style='color:red' v-show="!validate.success" >{{ validate.message }}</span>
     <div v-if="active"></div>

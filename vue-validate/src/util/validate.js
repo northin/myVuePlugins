@@ -8,10 +8,11 @@ myValidate.install = function(Vue,options){
 
     Vue.directive("validate",{
         bind(el,binding,vnode,oldVnode){
-            // console.log(el.value)
+            // console.log(el)
             // console.log(binding)
-            // console.log()
-            let a = new validateObj(el.value,binding.value.rules)
+            // console.log(vuer.context)
+            // vnode.context[binding.value.key] = el.value
+            let a = new validateObj(el.value,binding.value.rules,vnode)
             // a.check(12,2)
             // console.log(a)
             if(a.result == true){
@@ -25,7 +26,8 @@ myValidate.install = function(Vue,options){
         update(el,binding,vnode,oldVnode){
             // console.log(el)
             // console.log(binding)
-            let a = new validateObj(el.value,binding.value.rules)
+            vnode.context[binding.value.key] = el.value
+            let a = new validateObj(el.value,binding.value.rules,vnode)
             if(a.result == true){
                 binding.value.success = true
             }else{

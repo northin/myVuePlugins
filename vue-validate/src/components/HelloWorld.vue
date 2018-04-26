@@ -1,7 +1,8 @@
 <template>
   <div class="hello">
     <validate title="账号" :validate="validate.user"  v-model="user" ></validate>
-    <validate title="密码" :validate="validate.pass"  v-model="pass" ></validate>
+    <validate ref="pass" title="密码" :validate="validate.pass"  v-model="pass" ></validate>
+    <validate title="确认密码" :validate="validate.checkPass"  v-model="checkPass" ></validate>
     <!-- <div>
       <label>账号:</label>
       <input type='text' v-validate=validate.user v-model="user" />
@@ -11,13 +12,12 @@
       <label>密码:</label>
       <input type='text' v-validate=validate.pass v-model="pass" />
     </div> -->
-    <div>
+    <!-- <div>
       <label>确认密码:</label>
       <input type='text' />
-    </div>
+    </div> -->
 
-    <button @click="submit">提交</button>
-    
+    <button @click="submit" :disabled=!isDis>提交</button>
   </div>
 </template>
 
@@ -30,26 +30,40 @@ export default {
       active:'false',
       validate:{
         user:{
+          key:'user',
           rules:'require,user',
           message:'',
           success:''
         },
         pass:{
+          key:'pass',
           rules:'require,len[1:6]',
+          message:'',
+          success:''
+        },
+        checkPass:{
+          key:'checkPass',
+          rules:'require,equal[pass]',
           message:'',
           success:''
         },
       },
       user:'',
-      pass:''
+      pass:'',
+      checkPass:''
+    }
+  },
+  computed:{
+    isDis:function(){
+      return this.validate.user.success&&this.validate.pass.success&&this.validate.checkPass.success
     }
   },
   mounted:function(){
-    console.log(this.validate.user.message)
+    console.log(this.validate.user)
   },
   methods:{
     submit(){
-      console.log(this.user)
+      console.log(this.validate.user)
     }
   }
 }
