@@ -4,7 +4,7 @@
         <el-radio-button :label="false">展开</el-radio-button>
         <el-radio-button :label="true">收起</el-radio-button>
     </el-radio-group> -->
-    
+
     <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
         <div class="side-title">
             后台管理系统
@@ -28,7 +28,7 @@
             </el-submenu>
             <el-submenu index="1-2">
                 <span slot="title">选项2</span>
-                <el-menu-item index="1-2-1">选项1-2-1</el-menu-item>
+                <el-menu-item index="1-2-1"><router-link to="adminForm2">表单</router-link></el-menu-item>
             </el-submenu>
             <el-submenu index="1-3">
                 <span slot="title">选项3</span>

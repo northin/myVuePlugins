@@ -1,10 +1,4 @@
 <template>
-    <div class="index">
-      <div class="index-right">
-        <side></side>
-      </div>
-      <div class="index-left">
-         <myHeader></myHeader>
          <div style="margin:20px;">
              <div style="margin-bottom:20px;display:flex;height:">
                 <el-input v-model="input" style="width:200px;margin-right:20px;" placeholder="请输入内容"></el-input>
@@ -71,14 +65,10 @@
             </message-dialog>
 
          </div>
-      </div>
-    </div>
 </template>
 <script>
-import side from '../components/side'
-import myHeader from '../components/myHeader'
-import myDialog from '../components/myDialog'
-import messageDialog from '../components/messageDialog'
+import myDialog from './myDialog'
+import messageDialog from './messageDialog'
 export default {
   name: '表格',
   data () {
@@ -92,72 +82,59 @@ export default {
         addTitle:'添加',
         formLabelWidth:"200px",
         addVisible:false,
-        addForm:{
-          date:{
-            key:'',
-            title:'日期',
-            type:'input'
-          },
-          name:{
-            key:'',
-            title:'姓名',
-            type:'input'
-          },
-          // region:{
-          //   key:'',
-          //   type:'select',
-          //   title:'活动选项',
-          //   options:[
-          //     {
-          //       label:'上海',
-          //       value:'001'
-          //     },{
-          //       label:'杭州',
-          //       value:'002'
-          //     }
-          //   ]
-          // },
-          address:{
-            key:'',
-            type:'input',
-            title:'地址'
-          },
-
-        },
+        // addForm:{
+        //   date:{
+        //     key:'',
+        //     title:'日期',
+        //     type:'input'
+        //   },
+        //   name:{
+        //     key:'',
+        //     title:'姓名',
+        //     type:'input'
+        //   },
+        //   address:{
+        //     key:'',
+        //     type:'input',
+        //     title:'地址'
+        //   },
+        //
+        // },
         currentRow:'',
         input:'',
-        tableData3: [{
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-08',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-06',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-07',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }],
+        // tableData3: [{
+        //   date: '2016-05-03',
+        //   name: '王小虎',
+        //   address: '上海市普陀区金沙江路 1518 弄'
+        // }, {
+        //   date: '2016-05-02',
+        //   name: '王小虎',
+        //   address: '上海市普陀区金沙江路 1518 弄'
+        // }, {
+        //   date: '2016-05-04',
+        //   name: '王小虎',
+        //   address: '上海市普陀区金沙江路 1518 弄'
+        // }, {
+        //   date: '2016-05-01',
+        //   name: '王小虎',
+        //   address: '上海市普陀区金沙江路 1518 弄'
+        // }, {
+        //   date: '2016-05-08',
+        //   name: '王小虎',
+        //   address: '上海市普陀区金沙江路 1518 弄'
+        // }, {
+        //   date: '2016-05-06',
+        //   name: '王小虎',
+        //   address: '上海市普陀区金沙江路 1518 弄'
+        // }, {
+        //   date: '2016-05-07',
+        //   name: '王小虎',
+        //   address: '上海市普陀区金沙江路 1518 弄'
+        // }],
         multipleSelection: []
     }
   },
+  props:["tableData3","addForm"],
   methods: {
       messageSure(){
 
@@ -166,45 +143,38 @@ export default {
           this.messageDialogVisible = false
         }else if(this.messageDialogOrp == "add"){ //添加
           if(this.messageDialogOrp1 == ""){  //添加的是否确认提示
-            this.messageDialogVisible = true;
-            this.messageType = "info"
-            this.messageDialogOrp1 = "add"
-            this.addVisible = false
-          }else if(this.messageDialogOrp1 == "add"){  //添加的操作成功提示
-
-            this.messageDialogVisible = false;
-            this.messageDialogOrp1 = ""
             // this.messageDialogVisible = true;
-            // axios.add().then(data=>{
-            //   if(success){
-            //     this.reset(this.addForm)
-
-            //   }
-            // })
+            // this.messageType = "info"
+            // this.messageDialogOrp1 = "add"
+            this.addVisible = false
+            this.messageDialogVisible = false;
+            let returnV = this.$emit("add",this.addForm)
+            // console.log(returnV)
           }
 
         }else if(this.messageDialogOrp == "warn"){   //提示选中
           this.messageDialogVisible = false
         }else if(this.messageDialogOrp == "update"){ //修改
           if(this.messageDialogOrp1 == ""){//修改的是否确认提示
-            this.messageDialogVisible = true;
-            this.messageType = "info"
-            this.messageDialogOrp1 = "update"
-            this.addVisible = false
-          }else if(this.messageDialogOrp1 == "update"){//修改的操作成功提示
-
-            this.messageDialogVisible = false;
-            this.messageDialogOrp1 = ""
             // this.messageDialogVisible = true;
-            // axios.add().then(data=>{
-            //   if(success){
-            //     this.reset(this.addForm)
-
-            //   }
-            // })
+            // this.messageType = "info"
+            // this.messageDialogOrp1 = "update"
+            this.addVisible = false
+            this.messageDialogVisible = false;
+            this.$emit("update",this.addForm)
           }
+
         }else if(this.messageDialogOrp == "remove"){
-          this.messageDialogVisible = false;
+
+
+          if(this.messageDialogOrp1 == ""){//修改的是否确认提示
+            // this.messageDialogVisible = true;
+            // this.messageType = "info"
+            // this.messageDialogOrp1 = "remove"
+            // this.addVisible = false
+            this.messageDialogVisible = false;
+            this.$emit("remove",this.addForm)
+          }
 
         }
       },
@@ -288,6 +258,12 @@ export default {
           this.messageDialogOrp = 'remove'
           this.messageDialogVisible = true;
           this.messageType = "comfirm"
+          for (var key in this.currentRow) {
+            if (this.currentRow.hasOwnProperty(key)) {
+              this.addForm[key].key =  this.currentRow[key]
+            }
+          }
+
         }
       },
       reset(form){
@@ -299,8 +275,6 @@ export default {
       }
   },
   components: {
-    side,
-    myHeader,
     myDialog,
     messageDialog
   }

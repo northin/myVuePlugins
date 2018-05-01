@@ -34,6 +34,7 @@ export default {
     margin-top:10px;
 }
 .header-img{
+    cursor:pointer;
     margin-top:5px;
     margin-right:30px;
     border-radius: 100%;
