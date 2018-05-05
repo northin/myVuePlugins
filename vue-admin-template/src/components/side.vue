@@ -23,16 +23,17 @@
                 <span slot="title">导航一</span>
             </template>
             <el-submenu index="1-1">
-                <span slot="title">选项1</span>
+                <span slot="title">基本表格</span>
                 <el-menu-item index="1-1-1"><router-link to="adminForm">表格</router-link></el-menu-item>
+                <el-menu-item index="1-2-1"><router-link to="adminForm2">表单</router-link></el-menu-item>
+                <el-menu-item index="1-3-1"><router-link to="editor">富文本表单</router-link></el-menu-item>
             </el-submenu>
             <el-submenu index="1-2">
                 <span slot="title">选项2</span>
-                <el-menu-item index="1-2-1"><router-link to="adminForm2">表单</router-link></el-menu-item>
             </el-submenu>
             <el-submenu index="1-3">
                 <span slot="title">选项3</span>
-                <el-menu-item index="1-3-1">选项1-3-1</el-menu-item>
+                
             </el-submenu>
             <el-submenu index="1-4">
                 <span slot="title">选项4</span>

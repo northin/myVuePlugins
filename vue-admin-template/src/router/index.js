@@ -6,6 +6,7 @@ import Project from '@/view/Project'
 import AdminForm from '@/view/AdminForm'
 import AdminForm2 from '@/view/AdminForm2'
 import Form2 from '@/view/Form2'
+import Editor from '@/view/Editor'
 Vue.use(Router)
 
 export default new Router({
@@ -39,6 +40,11 @@ export default new Router({
       path: '/form2',
       name: 'Form2',
       component: Form2
+    },
+    {
+      path: '/editor',
+      name: 'Editor',
+      component: Editor
     }
   ]
 })
