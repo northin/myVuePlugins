@@ -1,0 +1,47 @@
+/*! 版权所有，翻版必究 */
+.header-top {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4vw;
+  color: #fff;
+  margin: 0 auto;
+  height: 5vh;
+  line-height: 5vh;
+  background: #00a2df;
+}
+.header-top .header-right button {
+  margin: 0 10px;
+}
+.ant-layout-sider {
+  top: 5vh;
+}
+.ant-layout-header {
+  margin-top: 5vh;
+}
+.myTitle-top {
+  border-bottom: 1px dashed #ccc;
+  padding: 0 2vw;
+  text-align: left;
+}
+.baseInfo-top {
+  height: 10vh;
+}
+.baseInfo-custInfo {
+  text-align: left;
+}
+.baseInfo-custInfo div {
+  line-height: 5vh;
+}
+.baseInfo-fundInfo {
+  margin-left: 3vw ! important;
+}
+.baseInfo-fundInfo .baseInfo-fundInfo-col {
+  text-align: left;
+}
+.baseInfo-fundInfo .baseInfo-fundInfo-col .money {
+  padding: 10px 0;
+  color: red;
+  font-size: 14px;
+}

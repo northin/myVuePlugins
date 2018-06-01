@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import { BrowserRouter, Route,Link } from 'react-router-dom'
 
-import { MyHeader } from "@comp/myHeader.js"
+import MyLayout from "@comp/myLayout.js"
+import MyHeader from "@comp/MyHeader.js"
 class App extends Component{
     constructor(props){
         super(props)
@@ -10,11 +11,9 @@ class App extends Component{
     render(){
         return (
             <div>
-                <MyHeader />
-                <ul>
-                    <li><Link to="/about">about</Link></li>    
-                </ul>
-                {this.props.children}
+                <MyHeader></MyHeader>
+                <MyLayout>{this.props.children}</MyLayout>
+                {/*  */}
             </div>
         )
     }

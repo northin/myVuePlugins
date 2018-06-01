@@ -18,6 +18,7 @@ class ToDoList extends Component {
         ).isRequired,
         onTodoClick: PropTypes.func.isRequired
     }
+    
     render(){
         return (
             <div>

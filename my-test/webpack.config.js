@@ -20,6 +20,7 @@ module.exports = {
 	},
 	entry: __dirname + "/app/app.js",
 	output: {
+		publicPath:"/",
 		path: __dirname + "/public",
 		filename: "[name]-[hash].js"   //会导致改变文件内容后重新打包时，文件名不同而内容越来越多
 	},
@@ -30,7 +31,9 @@ module.exports = {
 		alias:{         // import bar from "bar"
 			// "bar":path.resolve(__dirname,"app/bar.js")
 			"@view":path.resolve(__dirname,"app/view"),
-			"@comp":path.resolve(__dirname,"app/componments")
+			"@comp":path.resolve(__dirname,"app/componments"),
+			"@redux":path.resolve(__dirname,"app/redux"),
+			"@less":path.resolve(__dirname,"app/assets/less"),
 		}
 	},
 	module: {
@@ -38,10 +41,10 @@ module.exports = {
 			{
 				test:/(\.jsx|\.js)$/,
 				use:{
-					loader:'babel-loader',
+					loader:'babel-loader?cacheDirectory=true',
 					options: {
                         presets: [
-                            "env", "react"
+                            "env", "react", 'stage-1'
 						],
 						"plugins": [
 							[
@@ -50,7 +53,14 @@ module.exports = {
 								"libraryName": "antd",
 								"libraryDirectory": "es",
 								"style": "css" 
-							  }
+							  }],[
+							  "transform-runtime",
+								{
+								"helpers": false,
+								"polyfill": false,
+								"regenerator": true,
+								"moduleName": "babel-runtime"
+								}
 							]
 						],
 						"sourceMaps": true
@@ -59,30 +69,9 @@ module.exports = {
 				exclude: /node_modules/
 			},
 			{
-				test:/\.css$/,
-				use: ExtractTextPlugin.extract({
-					fallback: "style-loader",
-					use: { 
-						loader:"css-loader",
-						// options: {
-						// 	modules: true, // 指定启用css modules
-						// 	localIdentName: '[name]__[local]--[hash:base64:5]' // 指定css的类名格式
-						// }
-					}
-				  })
-				// use:[
-					
-				// 	{
-				// 		loader:'style-loader',
-				// 	},{
-				// 		loader:'css-loader',
-				// 		options: {
-                //             modules: true, // 指定启用css modules
-                //             localIdentName: '[name]__[local]--[hash:base64:5]' // 指定css的类名格式
-                //         }
-				// 	},
-				// ]
-			},
+                test: /\.css$/,
+                loader: 'style-loader!css-loader?importLoaders=1',
+            },
 			{
 				test: /\.less$/,
 				use:ExtractTextPlugin.extract({
@@ -115,13 +104,13 @@ module.exports = {
 		new HtmlWebpackPlugin({
             template: "index.html"//new 一个这个插件的实例，并传入相关的参数
 		}),
-		new ExtractTextPlugin("[name].css"),
-		// new webpack.optimize.UglifyJsPlugin(),
-		new CleanWebpackPlugin('build/*.*', {
-			root: __dirname,
-			verbose: true,
-			dry: false
-		}),
+		new ExtractTextPlugin("[name]-[hash].css"),
+		// // new webpack.optimize.UglifyJsPlugin(),
+		// new CleanWebpackPlugin('build/*.*', {
+		// 	root: __dirname,
+		// 	verbose: true,
+		// 	dry: false
+		// }),
 		new webpack.HotModuleReplacementPlugin()//热加载插件
     ],
 }
