@@ -2,12 +2,14 @@ import {
     add,
     ADD,
     USER, 
+    LOGIN,
     userQueryAll
 } from "./../action/action.js"
 import { combineReducers } from 'redux'
 const initialState = {
     test:[],
-    user:[{name:"sj",age:12}]
+    user:[{name:"sj",age:12}],
+    isAuth:true
 };
 
 
@@ -27,6 +29,10 @@ function test(state=initialState,action){
                     ...action.data
                 ]
             })
+        case LOGIN:
+        return Object.assign({},state,{
+            isAuth:true
+        })
         default:
             return state 
     }

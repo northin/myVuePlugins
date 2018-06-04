@@ -21,6 +21,8 @@ import TakeMoney from '@view/fundManage/TakeMoney';
 import HisOrderQry from '@view/info/HisOrderQry';
 import OrderQry from '@view/info/OrderQry';
 
+import Login from '@view/Login'
+
 const loggerMiddleware = createLogger()
 function configureStore(preloadedState) {
     return createStore(
@@ -34,28 +36,35 @@ function configureStore(preloadedState) {
 }
 let store =  configureStore()
 
+const ProtectPage = props => {
+    // 如果没有登录
+    console.log(store.getState())
+    if (!store.getState().isAuth) {
+        return <Redirect to='/login'></Redirect>
+    } else {
+        return <App {...props}/>
+    }
+}
 
-const router =
-<Provider store={store}>
-    <BrowserRouter>
-        <App>
-            {/* <MyLayout> */}
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/about" component={About} />
-                    <Route exact path="/user" component={User} />
-                    <Route path="/baseInfo" component={BaseInfo} />
-                    <Route path="/user/cread" component={CreadCard} />
-                    <Route path="/user/mbChange" component={MbChange} />
-                    <Route path="/user/safeQuesSet" component={SafeQuesSet} />
-                    <Route path="/info/hisOrderQry" component={HisOrderQry} />
-                    <Route path="/info/orderQry" component={OrderQry} />
-                    <Route path="/fund/takeMoney" component={TakeMoney} />
-                    <Route path="/fund/charge" component={Charge} />
-                    <Route component={NoFund} /> 
-                </Switch>
-            {/* </MyLayout> */}
-        </App>
-    </BrowserRouter>
-</Provider>
-export default router
+class MyRouter extends Component{
+    constructor(props){
+        super(props)
+    }
+    render(){
+        return (
+                <Provider store={store} >
+                    <BrowserRouter>
+                        <div>
+                            <Route path="/login" component={Login} />
+                            <Route path="/app" component={ProtectPage} />
+                        </div>
+                    </BrowserRouter>
+                
+                </Provider>
+        )
+    }
+}
+
+
+
+export default MyRouter

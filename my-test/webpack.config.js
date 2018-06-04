@@ -34,6 +34,7 @@ module.exports = {
 			"@comp":path.resolve(__dirname,"app/componments"),
 			"@redux":path.resolve(__dirname,"app/redux"),
 			"@less":path.resolve(__dirname,"app/assets/less"),
+			"@picture":path.resolve(__dirname,"app/assets/picture"),
 		}
 	},
 	module: {
