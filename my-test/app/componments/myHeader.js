@@ -61,7 +61,7 @@ class MyHeader extends Component{
 }
 const mapStateToProps  = state => {
     return {
-        isAuth : state.isAuth
+        isAuth : state.getIn(["test","isAuth"])
     }
 }
 export default connect(

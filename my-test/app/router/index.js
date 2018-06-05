@@ -12,14 +12,6 @@ import { createStore,applyMiddleware } from "redux";
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import todoApp from "@redux/reducers/reducers.js"
-import BaseInfo from '@view/personal/BaseInfo';
-import CreadCard from '@view/personal/CreadCard';
-import MbChange from '@view/personal/MbChange';
-import SafeQuesSet from '@view/personal/SafeQuesSet';
-import Charge from '@view/fundManage/Charge';
-import TakeMoney from '@view/fundManage/TakeMoney';
-import HisOrderQry from '@view/info/HisOrderQry';
-import OrderQry from '@view/info/OrderQry';
 
 import Login from '@view/Login'
 
@@ -38,8 +30,7 @@ let store =  configureStore()
 
 const ProtectPage = props => {
     // 如果没有登录
-    console.log(store.getState())
-    if (!store.getState().isAuth) {
+    if (!store.getState().getIn(['test',"isAuth"])) {
         return <Redirect to='/login'></Redirect>
     } else {
         return <App {...props}/>

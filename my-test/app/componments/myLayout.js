@@ -51,7 +51,7 @@ class MyLayout extends Component{
               <Menu.Item key="12"><Link to="/app/info/hisOrderQry">历史订单查询</Link></Menu.Item>
               <Menu.Item key="13"><Link to="/app/info/orderQry">今日订单查询</Link></Menu.Item>
               <Menu.Item key="14"><Link to="/app/info">历史成交查询</Link></Menu.Item>
-              <Menu.Item key="15"><Link to="/app/info">今日成交查询</Link></Menu.Item>
+              <Menu.Item key="15"><Link to="/app/about">今日成交查询</Link></Menu.Item>
             </SubMenu>
             <Menu.Item key="16">
                 <Icon type="upload" />

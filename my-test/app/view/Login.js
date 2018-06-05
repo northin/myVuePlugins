@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Redirect,BrowserRouter,Link } from 'react-router-dom'
+import BaseComponment from "@comp/BaseComponment.js"
 import {
     userLogin
 } from "@redux/action/action.js"
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 const FormItem = Form.Item;
 
-class Login extends Component{
+class Login extends BaseComponment{
 
     constructor(props){
         super(props)
@@ -80,7 +81,7 @@ Login.propTypes = {
 }
 const mapStateToProps  = state => {
     return {
-        users : state.user
+        users : state.getIn(["test","user"])
     }
 }
 const mapDispatchToProps = dispatch => {
