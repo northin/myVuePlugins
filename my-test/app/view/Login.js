@@ -6,7 +6,7 @@ import BaseComponment from "@comp/BaseComponment.js"
 import {
     userLogin
 } from "@redux/action/action.js"
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import {message, Form, Icon, Input, Button, Checkbox } from 'antd';
 const FormItem = Form.Item;
 
 class Login extends BaseComponment{
@@ -19,17 +19,25 @@ class Login extends BaseComponment{
     }
     componentWillMount() {
     }
-    handleSubmit = (e) => {
+     handleSubmit =  async(e) => {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        await this.props.form.validateFields( async (err, values) => {
           if (!err) {
-            this.props.onLogin()
-            this.setState({redirect: true});  
+            await this.props.onLogin()
+            if(this.props.isAuth){
+                this.setState({redirect: true});  
+                this.success("登录成功！")
+            }else{
+                this.error("登录失败！密码错误或账号错误！")
+            }
+            
           }
         });
       }
+    
     render(){
         const that = this.props
+        
         if (this.state.redirect) {  
             return <Redirect push to="/app/user/baseInfo" />; //or <Redirect push to="/sample?a=xxx&b=yyy" /> 传递更多参数  
         }  
@@ -71,17 +79,18 @@ class Login extends BaseComponment{
 }
 
 Login.propTypes = {
-    users: PropTypes.arrayOf(
-        PropTypes.shape({
-            // name: PropTypes.string.isRequired,
-            // age: PropTypes.number.isRequired,
-        }).isRequired
-    ).isRequired,
+    // users: PropTypes.arrayOf(
+    //     PropTypes.shape({
+    //         // name: PropTypes.string.isRequired,
+    //         // age: PropTypes.number.isRequired,
+    //     }).isRequired
+    // ).isRequired,
+    isAuth: PropTypes.bool.isRequired,
     onLogin: PropTypes.func.isRequired
 }
 const mapStateToProps  = state => {
     return {
-        users : state.getIn(["test","user"])
+        isAuth:state.getIn(["login","isAuth"])
     }
 }
 const mapDispatchToProps = dispatch => {

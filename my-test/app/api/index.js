@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Immutable from 'immutable';
 //BASE_URL是默认的url地址，如果你安装了webpack，可以在webpack配置全局变量
 // axios.defaults.baseURL = BASE_URL;
 /*
@@ -8,13 +9,13 @@ import axios from 'axios'
 axios.defaults.baseURL = "http://127.0.0.1:3000"
 const getData = (url, param) => {
     return (
-        immutable.fromJS(axios.get(`${url}`) || {})
+        Immutable.fromJS(axios.get(`${url}`) || {})
     )
 }
 
 const postData = (url, param) => {
     return (
-        immutable.fromJS(axios.post(`${url}`, param) || {})
+        Immutable.fromJS(axios.post(`${url}`, param) || {})
     )
 }
 
@@ -26,6 +27,14 @@ class API{
         } catch (error) {
             console.log('error: ', error)
         }
+    }
+    async IsLogin(){
+        try {
+            let response = await getData(`/user/isLogin`)
+            return response
+        } catch (error) {
+            console.log('error: ', error)
+        } 
     }
 }
 

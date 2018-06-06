@@ -35,6 +35,7 @@ module.exports = {
 			"@redux":path.resolve(__dirname,"app/redux"),
 			"@less":path.resolve(__dirname,"app/assets/less"),
 			"@picture":path.resolve(__dirname,"app/assets/picture"),
+			"@util":path.resolve(__dirname,"app/utils"),
 		}
 	},
 	module: {
@@ -45,7 +46,7 @@ module.exports = {
 					loader:'babel-loader?cacheDirectory=true',
 					options: {
                         presets: [
-                            "env", "react", 'stage-1'
+                            "env", "react", 'stage-1','stage-2'
 						],
 						"plugins": [
 							[

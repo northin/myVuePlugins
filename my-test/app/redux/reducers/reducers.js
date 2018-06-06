@@ -1,18 +1,20 @@
 import { 
     add,
+    testRemove,
     ADD,
     USER, 
-    LOGIN,
+    TEST_REMOVE,
     userQueryAll
 } from "./../action/action.js"
 // import { combineReducers } from 'redux'
 import Immutable from 'immutable';
 import {combineReducers} from 'redux-immutable';
+import "@util/util.js"
+import login from "./login.js"
 // const initialState = ;
 const initialState = Immutable.fromJS({
     test:[{id:1}],
-    user:[{name:"sj",age:12}],
-    isAuth:true
+    user:[{name:"sj",age:12}]
 });
 
 function test(state=initialState,action){
@@ -22,30 +24,18 @@ function test(state=initialState,action){
             return state.updateIn(["test"],list => list.push(action.data))
         case USER:
             return state.update("user",action.data)
-        case LOGIN:
-            return state.set("isAuth",true)
-        default:
-            return state 
-    }
-}
-const initialState1 = Immutable.Map({});
-function test1(state=initialState1,action){
-    switch(action.type){
-        case ADD:
-            return state.set("test1",action.data)
-        case USER:
-            return state.set("user1",action.data)
-        case LOGIN:
-            return state.setIn(["test","isAuth1"],true)
+        case TEST_REMOVE:
+            return state.updateIn(["test"],list => list.delete(action.data))
         default:
             return state 
     }
 }
 
+
 const todoApp = combineReducers({
     // visibilityFilter,
     test,
-    test1
+    login
 })
 
 export default todoApp

@@ -12,7 +12,7 @@ import { createStore,applyMiddleware } from "redux";
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import todoApp from "@redux/reducers/reducers.js"
-
+import { isLogin } from "@redux/action/action.js"
 import Login from '@view/Login'
 
 const loggerMiddleware = createLogger()
@@ -28,14 +28,57 @@ function configureStore(preloadedState) {
 }
 let store =  configureStore()
 
-const ProtectPage = props => {
-    // 如果没有登录
-    if (!store.getState().getIn(['test',"isAuth"])) {
-        return <Redirect to='/login'></Redirect>
-    } else {
-        return <App {...props}/>
+class ProtectPage extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            ispass:''
+        }
     }
+    componentWillMount() {
+        this.request()
+     
+    }
+    async request(){
+        const pass = await store.dispatch(isLogin())
+        if(!store.getState().getIn(['login',"isAuth"])){
+            this.setState({
+                ispass:true
+            }) 
+        }else{
+            this.setState({
+                ispass:false
+            }) 
+        }
+        // return 
+    }
+    render(){
+        return (
+            <div>
+                {
+                     (this.state.ispass)?(
+                        <Redirect to='/login'></Redirect>
+                    ):(
+                        <App {...this.props}/>   
+                    )
+                }
+            </div>
+        )
+    }
+
 }
+// const ProtectPage = (props) => {
+//     // 如果没有登录
+//     // dispatch(isLogin())
+//     store.dispatch(isLogin())
+//     if (!store.getState().getIn(['login',"isAuth"])) {
+//         return <Redirect to='/login'></Redirect>
+//     } else {
+//         return <App {...props}/>
+//     }
+
+    
+// }
 
 class MyRouter extends Component{
     constructor(props){

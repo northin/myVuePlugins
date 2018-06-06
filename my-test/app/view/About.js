@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import {
-    add
+    add,
+    testRemove
 } from "@redux/action/action.js"
-
-class About extends Component{
+import BaseComponment from "@comp/BaseComponment.js"
+import MyModal from '@comp/myModal.js'
+class About extends BaseComponment{
 
     constructor(props){
         super(props)
@@ -13,13 +15,18 @@ class About extends Component{
     componentWillMount() {
         console.log(this.props.todos)
     }
+    
     render(){
         return (
             <div>
                 {
                     this.props.todos.map((todo,index) =>  <div key={index}>{todo.id}</div> )
                 }
-                <button onClick={()=>this.props.onClick(this.props.todos.length+1)}>{this.props.todos[0].id}</button>
+
+                <MyModal onRef={this.onRef} content="确认退出？" />
+                <button onClick={()=>this.props.onClick(this.props.todos.length+1)}>添加</button>
+                <button onClick={()=>this.props.onRemoveClick(1)}>删除</button>
+                <button onClick={this.onModalClick}>弹框</button>
             </div>
         )
     }
@@ -43,6 +50,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onClick: id => {
             dispatch(add({"id":id}))
+        },
+        onRemoveClick:id => {
+            dispatch(testRemove(id))
         }
     }
 }
