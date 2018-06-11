@@ -36,6 +36,20 @@ class API{
             console.log('error: ', error)
         } 
     }
+    async Login(){
+        try {
+            return await getData(`/user/login`)
+        } catch (error) {
+            console.log('error: ', error)
+        } 
+    }
+    async Logout(){
+        try {
+            return await getData(`/user/logout`)
+        } catch (error) {
+            console.log('error: ', error)
+        } 
+    }
 }
 
 export default new API()

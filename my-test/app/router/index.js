@@ -12,7 +12,7 @@ import { createStore,applyMiddleware } from "redux";
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import todoApp from "@redux/reducers/reducers.js"
-import { isLogin } from "@redux/action/action.js"
+import { isLogin } from "@redux/action/loginAction.js"
 import Login from '@view/Login'
 
 const loggerMiddleware = createLogger()

@@ -10,7 +10,7 @@ import {
 import Immutable from 'immutable';
 import {combineReducers} from 'redux-immutable';
 import "@util/util.js"
-import login from "./login.js"
+import login from "./loginReducer.js"
 // const initialState = ;
 const initialState = Immutable.fromJS({
     test:[{id:1}],

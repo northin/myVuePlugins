@@ -14,7 +14,7 @@ class BaseInfo extends Component{
     }
     componentWillMount() {
         // this.props.userQueryAll() //发送get请求
-        console.log(this.props.users)
+        // console.log(this.props.users)
     }
     render(){
         return (
@@ -82,12 +82,12 @@ class BaseInfo extends Component{
 }
 
 BaseInfo.propTypes = {
-    users: PropTypes.arrayOf(
-        PropTypes.shape({
-            // name: PropTypes.string.isRequired,
-            // age: PropTypes.number.isRequired,
-        }).isRequired
-    ).isRequired,
+    // users: PropTypes.arrayOf(
+    //     PropTypes.shape({
+    //         // name: PropTypes.string.isRequired,
+    //         // age: PropTypes.number.isRequired,
+    //     }).isRequired
+    // ).isRequired,
     userQueryAll: PropTypes.func.isRequired
 }
 const mapStateToProps  = state => {

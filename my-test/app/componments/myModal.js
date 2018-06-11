@@ -12,13 +12,14 @@ class MyModal extends React.Component {
   }
   handleOk = (e) => {
     console.log(e);
-    this.props.onHandeOK()
+    this.props.onHandeOK(e)
     this.setState({
       visible: false,
     });
   }
   handleCancel = (e) => {
     console.log(e);
+    this.props.onHandeCancel()
     this.setState({
       visible: false,
     });
@@ -28,7 +29,7 @@ class MyModal extends React.Component {
     return (
       <div>
         <Modal
-          title="确认信息？"
+          title="确认信息"
         //   onShow={}
           visible={this.state.visible}
           onOk={this.handleOk}

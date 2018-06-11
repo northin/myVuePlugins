@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import { Redirect,BrowserRouter,Link } from 'react-router-dom'
 import BaseComponment from "@comp/BaseComponment.js"
 import {
-    userLogin
-} from "@redux/action/action.js"
+    login
+} from "@redux/action/loginAction.js"
 import {message, Form, Icon, Input, Button, Checkbox } from 'antd';
 const FormItem = Form.Item;
 
@@ -19,7 +19,7 @@ class Login extends BaseComponment{
     }
     componentWillMount() {
     }
-     handleSubmit =  async(e) => {
+     handleSubmit = async (e) => {
         e.preventDefault();
         await this.props.form.validateFields( async (err, values) => {
           if (!err) {
@@ -96,7 +96,7 @@ const mapStateToProps  = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onLogin: () => {
-            dispatch(userLogin())
+            return dispatch(login())
         }
     }
 }

@@ -5,10 +5,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
     userLogin,
-    userLoginOut
-} from "@redux/action/action.js"
+    logout
+} from "@redux/action/loginAction.js"
 import BaseComponment from "@comp/BaseComponment.js"
 import '@less/myHeader.less'
+import MyModal from '@comp/myModal.js'
 import bg1 from "@picture/bg1.jpg"
 class MyHeader extends BaseComponment{
     constructor(props){
@@ -21,11 +22,16 @@ class MyHeader extends BaseComponment{
         isAuth: PropTypes.bool.isRequired,
         onLoginOut: PropTypes.func.isRequired
     }
-    logout = async(e) => {
+    onHandeOK= async (e) => {
         e.preventDefault();
-        await this.props.onLoginOut()
-        if(this.props.isAuth){
-            this.error("登出失败")
+        const as = await this.props.onLoginOut()
+        console.log(as)
+        await this.logout()
+    }
+    logout() {
+        const isLogoutSucc = this.props.isAuth;
+        if(isLogoutSucc){
+            this.error("登出失败!请稍后再试")
         }else{
             this.setState({
                 isLogout:true
@@ -43,7 +49,7 @@ class MyHeader extends BaseComponment{
                 <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">修改密码</a>
               </Menu.Item>
               <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" onClick={this.logout}>退出</a>
+                <a target="_blank" rel="noopener noreferrer" onClick={this.onModalClick}>退出</a>
               </Menu.Item>
             </Menu>
           );
@@ -52,6 +58,7 @@ class MyHeader extends BaseComponment{
         }  
         return (
             <div className="header-top">
+                <MyModal onRef={this.onRef} content="确认退出？" onHandeOK={this.onHandeOK}/>
                 <div>场外期权交易系统</div>
                 {this.props.isAuth?(
                     <div className="header-right">
@@ -84,7 +91,7 @@ const mapStateToProps  = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onLoginOut: () => {
-            dispatch(userLoginOut())
+            return dispatch(logout())
         }
     }
 }
