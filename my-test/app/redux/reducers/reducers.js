@@ -10,11 +10,12 @@ import {
 import Immutable from 'immutable';
 import {combineReducers} from 'redux-immutable';
 import "@util/util.js"
-import login from "./loginReducer.js"
+import auth from "./authReducer.js"
+import common from "./commonReducer.js"
 // const initialState = ;
 const initialState = Immutable.fromJS({
     test:[{id:1}],
-    user:[{name:"sj",age:12}]
+    user:[]
 });
 
 function test(state=initialState,action){
@@ -23,7 +24,7 @@ function test(state=initialState,action){
             console.log(action.data)
             return state.updateIn(["test"],list => list.push(action.data))
         case USER:
-            return state.update("user",action.data)
+            return state.updateIn(["user"],list => list.concat(action.data))
         case TEST_REMOVE:
             return state.updateIn(["test"],list => list.delete(action.data))
         default:
@@ -35,7 +36,8 @@ function test(state=initialState,action){
 const todoApp = combineReducers({
     // visibilityFilter,
     test,
-    login
+    auth,
+    common
 })
 
 export default todoApp

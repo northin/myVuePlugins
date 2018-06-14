@@ -5,8 +5,8 @@ import {
     userQueryAll
 } from "@redux/action/action.js"
 import { Button } from 'antd/lib/radio';
-
-class User extends Component{
+import BaseComponment from "@comp/BaseComponment.js"
+class User extends BaseComponment{
 
     constructor(props){
         super(props)
@@ -44,7 +44,7 @@ User.propTypes = {
 }
 const mapStateToProps  = state => {
     return {
-        users : state.user
+        users : state.getIn(["test","user"]).toJS()
     }
 }
 const mapDispatchToProps = dispatch => {

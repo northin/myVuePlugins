@@ -1,4 +1,4 @@
-import Api from "./../../api/index.js"
+import {auth_api} from "./../../api/index.js"
 export let ADD = "ADD"
 export let USER = "USER"
 export let TEST_REMOVE = "TEST_REMOVE"
@@ -11,8 +11,7 @@ export function testRemove(data){
 
 export const userQueryAll = () => async (dispatch) => {
     try {
-        console.log(Api)
-        let response = await Api.UserQueryAll("/user")
+        let response = await auth_api.UserQueryAll("/user")
         await dispatch(saveReducer(response.data))
     } catch (error) {
         console.log('error: ', error)

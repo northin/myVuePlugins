@@ -7,6 +7,9 @@ import {
 } from "@redux/action/action.js"
 import BaseComponment from "@comp/BaseComponment.js"
 import MyModal from '@comp/myModal.js'
+import EchartTest from '@comp/echarTest.js'
+import MyEditor from '@comp/myEditor.js'
+
 class About extends BaseComponment{
 
     constructor(props){
@@ -15,8 +18,17 @@ class About extends BaseComponment{
     componentWillMount() {
         console.log(this.props.todos)
     }
-    
+    onEditorStateChange(e){
+        console.log(e)
+    }
     render(){
+        const data = [
+            {value:335, name:'直接访问'},
+            {value:310, name:'邮件营销'},
+            {value:234, name:'联盟广告'},
+            {value:135, name:'视频广告'},
+            {value:1548, name:'搜索引擎'}
+        ]
         return (
             <div>
                 {
@@ -27,6 +39,8 @@ class About extends BaseComponment{
                 <button onClick={()=>this.props.onClick(this.props.todos.length+1)}>添加</button>
                 <button onClick={()=>this.props.onRemoveClick(1)}>删除</button>
                 <button onClick={this.onModalClick}>弹框</button>
+                <EchartTest  data={data} />
+                <MyEditor getData={this.onEditorStateChange}/>
             </div>
         )
     }

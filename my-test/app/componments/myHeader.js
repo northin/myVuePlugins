@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import {
     userLogin,
     logout
-} from "@redux/action/loginAction.js"
+} from "@redux/action/authAction.js"
 import BaseComponment from "@comp/BaseComponment.js"
 import '@less/myHeader.less'
 import MyModal from '@comp/myModal.js'
@@ -25,7 +25,6 @@ class MyHeader extends BaseComponment{
     onHandeOK= async (e) => {
         e.preventDefault();
         const as = await this.props.onLoginOut()
-        console.log(as)
         await this.logout()
     }
     logout() {
@@ -33,10 +32,12 @@ class MyHeader extends BaseComponment{
         if(isLogoutSucc){
             this.error("登出失败!请稍后再试")
         }else{
-            this.setState({
-                isLogout:true
-            })
+            // this.setState({
+            //     isLogout:true
+            // })
             this.success("登出成功")
+            
+            this.urlRedirect("/login")
         }
     }
     render(){
@@ -53,13 +54,14 @@ class MyHeader extends BaseComponment{
               </Menu.Item>
             </Menu>
           );
-        if (this.state.isLogout) {  
-            return <Redirect push to="/login" />; //or <Redirect push to="/sample?a=xxx&b=yyy" /> 传递更多参数  
-        }  
+        // if (this.state.isLogout) {  
+        //     return <Redirect push to="/login" />; //or <Redirect push to="/sample?a=xxx&b=yyy" /> 传递更多参数  
+        // }  
         return (
             <div className="header-top">
-                <MyModal onRef={this.onRef} content="确认退出？" onHandeOK={this.onHandeOK}/>
+                
                 <div>场外期权交易系统</div>
+                <MyModal onRef={this.onRef} content="确认退出？" onHandeOK={this.onHandeOK}/>
                 {this.props.isAuth?(
                     <div className="header-right">
                         <Dropdown overlay={menu}>
@@ -83,9 +85,10 @@ class MyHeader extends BaseComponment{
         )
     }
 }
+
 const mapStateToProps  = state => {
     return {
-        isAuth : state.getIn(["login","isAuth"])
+        isAuth : state.getIn(["auth","isAuth"])
     }
 }
 const mapDispatchToProps = dispatch => {

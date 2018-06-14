@@ -3,6 +3,44 @@
     display: block !important
 }
 
+
+//myHeader
+.header-top{
+    position: fixed;
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4vw;
+    color:#fff;
+    margin: 0 auto;
+    height: 5vh;
+    line-height: 5vh;
+    background: #00a2df;
+    .header-right{
+
+        button{
+            // padding: 0 10px;
+            margin: 0 10px;
+        }
+    }
+}
+.ant-layout-sider{
+    top:5vh
+}
+.ant-layout-header{
+    margin-top: 5vh;
+}
+.header-img{
+    width:40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.header-name{
+    display: inline-block;
+    width: 40px;
+    color: #fff;
+}
+
 // myTitle start 
 .myTitle-top{
     border-bottom: 1px dashed #ccc;
@@ -72,5 +110,26 @@
     float: right;
 }
 #components-form-demo-normal-login .login-form-button {
+    width: 100%;
+}
+
+//register start 
+#components-form-demo-normal-reg {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 500px;
+    height: 563px;
+}
+#components-form-demo-normal-reg .login-form {
+    max-width: 500px;
+}
+#components-form-demo-normal-reg .login-form-forgot {
+    float: right;
+}
+#components-form-demo-normal-reg .login-form-button {
     width: 100%;
 }

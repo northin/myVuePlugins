@@ -19,7 +19,7 @@ const postData = (url, param) => {
     )
 }
 
-class API{
+class AUTH_API{
     async UserQueryAll(){
         try {
             let response = await postData(`/cat`)
@@ -50,6 +50,25 @@ class API{
             console.log('error: ', error)
         } 
     }
+    async Register(){
+        try {
+            return await getData(`/user/register`)
+        } catch (error) {
+            console.log('error: ', error)
+        } 
+    }
 }
 
-export default new API()
+
+class COMMON_API  {
+    async dict(params){
+        try {
+            return await getData(`/user/dict?ddId=${params}`)
+        } catch (error) {
+            console.log('error: ', error)
+        } 
+    }
+}
+
+export let auth_api = new AUTH_API()
+export let common_api = new COMMON_API()
